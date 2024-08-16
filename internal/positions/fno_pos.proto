@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package positions;
+
+option go_package = ".";
+
+message FnoPositionRequest {
+    string fcp_clm_mtch_accnt = 1; // Example: 8181818102
+}
+
+message FnoPositionResponse {
+    repeated string ffo_contract = 1;
+    repeated string ffo_pstn = 2;
+    repeated int32 ffo_qty = 3;
+    repeated float ffo_avg_prc = 4;   
+}
+
+service FnoPositionService {
+    rpc GetFNOPosition(FnoPositionRequest) returns (FnoPositionResponse);
+}
+
+//protoc --proto_path=internal --go_out=internal/generated --go-grpc_out=internal/generated internal/positions/fno_pos.proto
